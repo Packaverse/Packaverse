@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packaverse.dev - Your Bedrock Pack Wiki</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: #f0f0f0;
+    overflow-x: hidden;
+  }
+  header {
+    background: #222;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  .menu-toggle {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+    display: none;
+  }
+  nav {
+    display: flex;
+  }
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #fff;
+  }
+  main {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: auto;
+    z-index: 1;
+    position: relative;
+  }
+  section {
+    margin-bottom: 4rem;
+    animation: fadeIn 0.8s ease;
+  }
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 0.5rem;
+  }
+  section p, section li {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  code, pre {
+    background: #1a1a1a;
+    padding: 0.8rem;
+    border-radius: 8px;
+    display: block;
+    overflow-x: auto;
+    color: #fff;
+    font-size: 1rem;
+  }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: #111;
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 4rem;
+  }
+  .button {
+    background: #fff;
+    color: #111;
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.8rem 0.5rem 0.8rem 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  }
+  .button:hover {
+    background: #ccc;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+  }
+  .button:active {
+    transform: scale(0.96);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+  }
+  ul {
+    padding-left: 1.2rem;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  #side-drawer {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #000000 rgba(100,100,100,0.8);
+    z-index: 1003;
+    padding-top: 2rem;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.5);
+  }
+  #side-drawer a {
+    display: block;
+    padding: 1rem 2rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-weight: 600;
+  }
+  #side-drawer a.sub-item {
+    padding-left: 3rem;
+    font-size: 0.95rem;
+  }
+  #side-drawer a:hover {
+    background: #fff;
+    color: #111;
+  }
+  #side-drawer.active {
+    left: 0;
+  }
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+  #overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .subcategory {
+    margin-left: 0rem;
+    margin-top: 0rem;
+    background: #181818;
+    padding: 0rem;
+    border-radius: 8px;
+    border-left: 4px solid #fff;
+  }
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+    }
+    .menu-toggle {
+      display: block;
+    }
+    .subcategory {
+      margin-left: 0;
+      padding: 0rem;
+      border-left: none;
+      border-top: 0px solid #fff;
+    }
+    #side-drawer a.sub-item {
+      padding: 0.8rem 2rem 0.8rem 3rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Packaverse.dev</h1>
+  <div class="menu-toggle" id="drawer-btn">&#9776;</div>
+  <nav>
+    <a href="#getting-started">Start</a>
+    <a href="#manifest">Manifest</a>
+    <a href="#textures">Textures</a>
+    <a href="#blocks">Blocks</a>
+    <a href="#items">Items</a>
+    <a href="#particles">Particles</a>
+    <a href="#tools">Tools</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div id="side-drawer">
+  <a href="#getting-started">Start</a>
+  <a href="#manifest">Manifest</a>
+  <a href="#textures">Textures</a>
+  <a href="#blocks">Blocks</a>
+  <a href="#animated-blocks" class="sub-item">→ Animated Blocks</a>
+  <a href="#items">Items</a>
+  <a href="#particles">Particles</a>
+  <a href="#tools">Tools</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<div id="overlay"></div>
+
+<main>
+  <section id="welcome">
+    <h2>Welcome to Packaverse!</h2>
+    <p>Welcome to Packaverse! Here, you’ll find everything you need to create your very own Minecraft Bedrock texture packs. Whether you're new or experienced, we’ll help you turn your ideas into awesome packs for your game.</p>
+    <a href="#getting-started" class="button" id="get-started-btn">Let's Get Started</a>
+  </section>
+
+  <section id="getting-started">
+    <h2>Getting Started</h2>
+    <ul>
+      <li>First, set up the proper folder structure.</li>
+      <li>Create your <code>manifest.json</code> file - this is the brain of your pack!</li>
+      <li>Now, design your custom textures, and place them in the correct directories.</li>
+      <li>Optionally, add a <code>pack_icon.png</code> for your pack’s icon.</li>
+      <li>Finally, test your pack by loading it into Minecraft!</li>
+    </ul>
+  </section>
+
+  <section id="manifest">
+    <h2>Creating Your Manifest</h2>
+    <p>Example:</p>
+    <pre>
+{
+  "format_version": 2,
+  "header": {
+    "description": "My first awesome texture pack",
+    "name": "My Awesome Pack",
+    "uuid": "your-unique-uuid-here",
+    "version": [1, 0, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "another-unique-uuid-here",
+      "version": [1, 0, 0]
+    }
+  ]
+}</pre>
+  </section>
+
+  <section id="textures">
+    <h2>Adding Textures & Pack Icon</h2>
+    <p>Folder structure example:</p>
+    <pre>
+resource_pack/
+|-- textures/
+|   |-- blocks/
+|   |-- items/
+|   |-- entity/
+|-- manifest.json
+|-- pack_icon.png</pre>
+    <p><code>pack_icon.png</code> (512x512 px) shows up as your pack's icon.</p>
+  </section>
+
+  <section id="blocks">
+    <h2>Blocks</h2>
+    <p>Blocks are the heart of Minecraft! To add or modify block textures, place your custom PNG files in the <code>textures/blocks/</code> directory of your resource pack.</p>
+    <pre>
+resource_pack/
+|-- textures/
+|   |-- blocks/
+|       |-- stone.png
+|       |-- dirt.png
+|       |-- grass_block.png</pre>
+    <ul>
+      <li>Each PNG file should be named after the block it replaces (e.g., <code>stone.png</code> for the stone block).</li>
+      <li>Recommended size: 16x16, 32x32, or 64x64 pixels (must be square).</li>
+      <li>Test your blocks in-game to ensure they look just right!</li>
+    </ul>
+    <div class="subcategory" id="animated-blocks">
+      <h3>Animated Blocks</h3>
+      <p>This guide will help you create animated blocks in Minecraft Bedrock Edition using a resource pack.</p>
+      <ul>
+        <li><b>Step 1: Gather Required Tools</b></li>
+        <li>Image Editing Software: isopix pro, pixelstudio, or ibispaintx.</li>
+<li>Text Editor: quick edit, acode, or zarchiver text editor.</li>
+      </ul>
+      <ul>
+      	<li><b>Step 2: Create Your Animation Image</b></li>
+<li>Open Image Editing Software: Start a new project.</li>
+<li>put the width as the texture of ur block and the height will be <b>"width × no. of frames you want"</b> for example my texture is 16x16 and i want the animated texture to show 4 frames then the width with be 16 but the height will be 16x4 which is 64</li>
+<li>Design Your Animation: Stack frames vertically in one image (e.g., variations of a diamond block).</li>
+<li>Save the Image: Save as PNG (e.g., diamond_block.png).</li>
+</ul>
+<ul>
+<li><b>Step 3: Create the Flipbook Textures JSON File</b></li>
+<li>Open Text Editor: Create a new file.<br></li>
+<li>Write JSON Code: Use this template:<br></li>
+
+<pre>
+   [
+     {
+       "flipbook_texture": "textures/blocks/diamond_block",
+       "atlas_tile": "diamond_block",
+       "ticks_per_frame": 1,
+       "frames": [0, 0, 0, 1, 1, 2, 2, 3]
+     }
+   ]
+</pre>
+  <p><li> save it as <b>flipbook_textures.json</b><li>
+</ul>
+      <pre>
+resource_pack/
+|-- textures/
+|   |-- blocks/
+|       |-- animated_block.png  (vertical strip with frames)</pre>
+      <p><strong>Tip:</strong> Use existing animated blocks (like water.png or lava.png) as references!</p>
+    </div>
+  </section>
+  <!-- END BLOCKS SECTION -->
+
+  <!-- ITEMS SECTION -->
+  <section id="items">
+    <h2>Items</h2>
+    <p>
+      Customize your tools, weapons, and more! Place your item textures in <code>textures/items/</code>.
+    </p>
+    <pre>
+resource_pack/
+|-- textures/
+|   |-- items/
+|       |-- diamond_sword.png
+|       |-- apple.png
+    </pre>
+    <ul>
+      <li>Each PNG should match the item’s name (e.g., <code>diamond_sword.png</code>).</li>
+      <li>Recommended size: 16x16, 32x32, or 64x64 pixels.</li>
+      <li>Test your items in-game to see your changes!</li>
+    </ul>
+  </section>
+  <!-- END ITEMS SECTION -->
+
+  <!-- PARTICLES SECTION -->
+  <section id="particles">
+    <h2>Particles</h2>
+    <p>
+      Particles add flair to your pack! Edit or add particle textures in <code>textures/particle/</code>.
+    </p>
+    <pre>
+resource_pack/
+|-- textures/
+|   |-- particle/
+|       |-- particles.png
+    </pre>
+    <ul>
+      <li>Each particle effect references a region in <code>particles.png</code>.</li>
+      <li>Use a pixel art editor to design unique effects (sparkles, smoke, etc.).</li>
+      <li>Test in-game by triggering effects (e.g., breaking blocks, fireworks).</li>
+    </ul>
+    <p>
+      <strong>Tip:</strong> Try the <a href="https://aikoncwd.itch.io/sprite-generator" target="_blank" style="color:#fff;text-decoration:underline;">Random Sprite Generator</a> for quick particle ideas!
+    </p>
+  </section>
+  <!-- END PARTICLES SECTION -->
+
+  <section id="tools">
+    <h2>Useful Tools</h2>
+    <a href="https://pepeongithub.github.io/Pepes-Manifest-Generator/" class="button" target="_blank">Manifest Generator</a>
+    <a href="https://github.com/MClientMCPE/TexturePackConverterX/releases/tag/v1" class="button" target="_blank">Java to Bedrock App</a>
+    <a href="https://modifiedcommand.github.io/ConvertJavaTextureToBedrock/" class="button" target="_blank">Java to Bedrock Website</a>
+    <a href="https://m.happymod.com/ibis-paint-x-318-7-mod/jp.ne.ibis.ibispaintx.app/" class="button" target="_blank">Ibis Paint X</a>
+    <a href="https://modyolo.com/pixel-studio-pixel-art-editor.html" class="button" target="_blank">Pixel Studio</a>
+    <a href="https://m.apkshub.com/down/com.nullium.isopix.pro_1.3.2_paid" class="button" target="_blank">Iso Pix Pro</a>
+    <a href="https://aikoncwd.itch.io/sprite-generator" class="button" target="_blank">Random Sprite Generator (Particles)</a>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Questions? Need support? Just want to say hi?</p>
+    <p>Email: <a href="mailto:support@packaverse.dev" style="color: #fff;">support@packaverse.dev</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 Packaverse. All rights reserved.</p>
+</footer>
+
+<script>
+  const drawerBtn = document.getElementById('drawer-btn');
+  const sideDrawer = document.getElementById('side-drawer');
+  const overlay = document.getElementById('overlay');
+
+  drawerBtn.addEventListener('click', function() {
+    sideDrawer.classList.toggle('active');
+    overlay.classList.toggle('active');
+  });
+
+  overlay.addEventListener('click', function() {
+    sideDrawer.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  document.getElementById('get-started-btn').addEventListener('click', function() {
+    document.getElementById('getting-started').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
