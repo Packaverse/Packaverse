@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
             "materials": "materials.html",
             "Render controllers": "render_controllers.html"
         },
+        "Useful Info": {
+            "Molang Queries": "queries.html",
+            "Entity Esp": "esp.html"
+        },
         "Development Tools": {
             "Bedrock CLI": "bedrock_cli.html",
             "Visual Studio code": "vs_code.html",
