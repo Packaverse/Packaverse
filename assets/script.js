@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "Useful Info": {
             "Molang Queries": "queries.html",
+            "Magic Method(official)": "magic_method.html",
             "Entity Esp": "esp.html"
         },
         "Development Tools": {
