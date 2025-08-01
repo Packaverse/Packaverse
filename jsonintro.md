@@ -1,28 +1,7 @@
----
-title: Intro to JSON UI
-category: General
-nav_order: 1
-tags:
-    - guide
-mentions:
-    - sermah
-    - KalmeMarq
-    - SirLich
-    - solvedDev
-    - Joelant05
-    - GTB3NW
-    - stirante
-    - MedicalJewel105
-    - r4isen1920
-    - shanewolf38
-    - LeGend077
-    - mark-wiemer
-    - TheItsNameless
-    - ThomasOrs
-    - QuazChick
-    - Cra-ZGuy
-description: Introduction to JSON UI.
----
+
+# Intro to JSON UI
+### Introduction to JSON UI.
+
 
 ## Introduction
 
@@ -1196,3 +1175,5 @@ Remove the existing `#example_binding_1` binding:
     }
 }
 ```
+### this doc is possible thanks too:
+**sermah, KalmeMarq, SirLich, solvedDev, Joelant05, GTB3NW, stirante, MedicalJewel105, r4isen1920, shanewolf38, LeGend077, mark-wiemer, TheItsNameless, ThomasOrs, QuazChick, Cra-ZGuy**
