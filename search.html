@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Packaverse</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header class="header">
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <a href="index.html" class="logo-link"><div class="logo">Packaverse</div></a>
+        <div class="search-container">
+            <form id="search-form" action="search.html" method="GET">
+                <input type="text" id="search-input" name="q" placeholder="Search again...">
+            </form>
+        </div>
+    </header>
+
+    <div class="backdrop" id="backdrop"></div>
+    <aside class="nav-drawer" id="nav-drawer">
+         <!-- Navigation content will be loaded here -->
+    </aside>
+
+    <main class="docs-main">
+        <h1>Search Results</h1>
+        <div id="results-container">
+            <p id="search-status">Loading search engine...</p>
+        </div>
+    </main>
+
+    <!-- Load Search JS before the main script -->
+    <script src="assets/search.js"></script>
+    <script src="assets/script.js"></script>
+</body>
+</html>

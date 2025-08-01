@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packaverse Documentation</title>
+    <style>
+        /* --- Material You Dark/Blue Theme & Base Styles --- */
+        :root {
+            --background-color: #121212;
+            --surface-color: #1E1E1E;
+            --primary-color: #4A90E2;
+            --primary-variant-color: #357ABD;
+            --text-color: #E0E0E0;
+            --text-secondary-color: #A0A0A0;
+            --border-radius: 16px;
+            --font-family: 'Roboto', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Search Bar --- */
+        .header {
+            background-color: var(--surface-color);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #2c2c2c;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .search-bar {
+            flex-grow: 0.5;
+            margin: 0 1rem;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .search-bar input:focus {
+            outline: 2px solid var(--primary-color);
+        }
+
+        /* --- Navigation Drawer --- */
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 280px;
+            background-color: var(--surface-color);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 2000;
+            padding-top: 60px;
+        }
+
+        .nav-drawer.open {
+            transform: translateX(0);
+        }
+
+        .nav-drawer .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+        
+        .nav-drawer nav ul {
+            list-style: none;
+        }
+
+        .nav-drawer nav h3 {
+            color: var(--primary-color);
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .nav-drawer nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-right: 1rem;
+        }
+
+        .nav-drawer nav a:hover {
+            background-color: var(--primary-variant-color);
+        }
+
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1999;
+        }
+
+        .backdrop.visible {
+            display: block;
+        }
+        
+        /* --- Main Content --- */
+        main {
+            padding: 2rem;
+        }
+
+        .docs-section {
+            margin-bottom: 2rem;
+        }
+
+        .docs-card {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .docs-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .docs-card p {
+            color: var(--text-secondary-color);
+        }
+        
+        .docs-card code {
+            background-color: var(--background-color);
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .search-bar {
+                display: none; /* Hide in header on mobile */
+            }
+            main {
+                padding: 1rem;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <button class="menu-btn" id="menu-btn">☰</button>
+        <div class="logo">Packaverse Docs</div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search documentation...">
+        </div>
+    </header>
+
+    <div class="backdrop" id="backdrop"></div>
+
+    <aside class="nav-drawer" id="nav-drawer">
+        <button class="close-btn" id="close-btn">×</button>
+        <nav>
+            <ul>
+                <li><h3>Getting Started</h3></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#usage">Basic Usage</a></li>
+            </ul>
+            <ul>
+                <li><h3>Categories</h3></li>
+                <li><a href="#blocks">Blocks</a></li>
+                <li><a href="#items">Items</a></li>
+                <li><a href="#ui">UI (User Interface)</a></li>
+                <li><a href="#entities">Entities</a></li>
+                <li><a href="#particles">Particles</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="docs-content">
+        <section id="installation" class="docs-section">
+            <h2>Installation</h2>
+            <div class="docs-card">
+                <h3>Downloading the Pack</h3>
+                <p>Download the <code>.mcpack</code> file from the official Packaverse website.</p>
+            </div>
+            <div class="docs-card">
+                <h3>Importing to Minecraft</h3>
+                <p>Open the downloaded <code>.mcpack</code> file. Minecraft: Bedrock Edition should automatically open and import the resource pack.</p>
+            </div>
+        </section>
+
+        <section id="usage" class="docs-section">
+            <h2>Basic Usage</h2>
+            <div class="docs-card">
+                <h3>Activating the Pack</h3>
+                <p>In Minecraft, go to Settings > Global Resources. Find "Packaverse" in the "My Packs" list and activate it.</p>
+            </div>
+        </section>
+        
+        <section id="blocks" class="docs-section">
+            <h2>Blocks</h2>
+            <div class="docs-card">
+                <h3>Custom Ores</h3>
+                <p>Packaverse introduces new textures for ores. The <code>deepslate_ruby_ore</code> now has a distinct, vibrant red glow.</p>
+            </div>
+            <div class="docs-card">
+                <h3>Animated Blocks</h3>
+                <p>The Crafting Table has a subtle, glowing animation to make your base feel more alive.</p>
+            </div>
+        </section>
+        
+        <section id="items" class="docs-section">
+            <h2>Items</h2>
+            <div class="docs-card">
+                <h3>Netherite Sword</h3>
+                <p>The Netherite Sword has been redesigned with a more menacing, blue-hued blade. The item is located at <code>items/netherite_sword.png</code>.</p>
+            </div>
+        </section>
+
+        <section id="ui" class="docs-section">
+            <h2>UI (User Interface)</h2>
+            <div class="docs-card">
+                <h3>Main Menu</h3>
+                <p>The main menu panorama has been replaced with a stunning view of a custom Packaverse landscape.</p>
+            </div>
+             <div class="docs-card">
+                <h3>HUD (Heads-Up Display)</h3>
+                <p>The health, hunger, and experience bars have been updated with a sleek, minimalist blue design.</p>
+            </div>
+        </section>
+        
+        <section id="entities" class="docs-section">
+            <h2>Entities</h2>
+            <div class="docs-card">
+                <h3>Creeper</h3>
+                <p>The Creeper model now has glowing blue veins, indicating its explosive power.</p>
+            </div>
+        </section>
+
+        <section id="particles" class="docs-section">
+            <h2>Particles</h2>
+            <div class="docs-card">
+                <h3>Critical Hit</h3>
+                <p>Critical hit particles are now larger and have a blue tint for better visibility during combat.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navDrawer = document.getElementById('nav-drawer');
+            const backdrop = document.getElementById('backdrop');
+            const searchInput = document.getElementById('search-input');
+            const docsContent = document.getElementById('docs-content');
+            const docsCards = docsContent.getElementsByClassName('docs-card');
+
+            // --- Drawer Functionality ---
+            function openDrawer() {
+                navDrawer.classList.add('open');
+                backdrop.classList.add('visible');
+            }
+
+            function closeDrawer() {
+                navDrawer.classList.remove('open');
+                backdrop.classList.remove('visible');
+            }
+
+            menuBtn.addEventListener('click', openDrawer);
+            closeBtn.addEventListener('click', closeDrawer);
+            backdrop.addEventListener('click', closeDrawer);
+            
+            // Close drawer when a link is clicked
+            const navLinks = navDrawer.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeDrawer);
+            });
+
+            // --- Search Functionality ---
+            searchInput.addEventListener('keyup', function(e) {
+                const query = e.target.value.toLowerCase();
+
+                for (let card of docsCards) {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const text = card.querySelector('p').textContent.toLowerCase();
+
+                    if (title.includes(query) || text.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

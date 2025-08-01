@@ -1,84 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Packaverse - Home</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: #0d0d0d;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .container {
-      text-align: center;
-      animation: fadeIn 1s ease-out, moveUp 1s ease-out;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: #ccc;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .button {
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      background: #fff;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      animation: slideIn 1.5s ease-out;
-    }
-
-    .button:hover {
-      background: #ccc;
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes moveUp {
-      from { transform: translateY(40px); }
-      to { transform: translateY(0); }
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packaverse - A New Minecraft Experience</title>
+    <!-- The path to the new stylesheet -->
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
-<body>
-  <div class="container">
-    <h1>Welcome to Packaverse</h1>
-    <p>Create and share amazing Minecraft Bedrock packs</p>
-    <a href="main.html" class="button">Packaverse.dev</a>
-  </div>
+<body class="home-body">
+    <div class="homepage-container">
+        <header class="home-header">
+            <div class="logo">Packaverse</div>
+            <nav class="home-nav">
+                <a href="#features">Features</a>
+                <a href="docs.html">Docs</a>
+            </nav>
+        </header>
+
+        <main class="hero-section">
+            <h1>Transform Your<br><span class="text-primary">Minecraft World</span></h1>
+            <p class="subtitle">The ultimate documentation for Minecraft: Bedrock Edition developers. Master JSON UI, animations, render controllers, and more with our comprehensive guides and resources.</p>
+            <div class="cta-buttons">
+                <a href="docs.html" class="btn btn-primary">Get Started</a>
+                <a href="docs.html" class="btn btn-secondary">Project Templates</a>
+            </div>
+        </main>
+
+        <footer class="home-footer" id="features">
+            <p>Join our community</p>
+            <div class="social-links">
+                <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
