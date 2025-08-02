@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "Useful Info": {
             "Molang Queries": "queries.html",
-            "Magic Method(official)": "magic_method.html",
-            "Entity Esp": "esp.html"
+            "Render Method(official)": "magic_method.html",
+            "Entity Esp": "esp.html",
+            "Night Vision(json & materials)": "night.html",
+            "Game Crash bindings(json ui)": "crash.html"
         },
         "Development Tools": {
             "Bedrock CLI": "bedrock_cli.html",

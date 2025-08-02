@@ -1,15 +1,5 @@
----
-title: Render Controllers
-category: General
-tags:
-    - beginner
-mentions:
-    - SirLich
-    - MedicalJewel105
-    - Overload1252
-    - ChibiMango
-description: Learn about render controllers.
----
+# Render Controllers
+# Learn about render controllers.
 
 Render controllers are an often-misunderstood part of the resource pack. But you don't need to be afraid! It would help if you considered render controllers as logic packs that take short-name definitions from the RP Entity File and determine how they will be combined/layered/rendered in-game.
 
@@ -306,3 +296,5 @@ Followed by:
 ],
 "geometry": "array.geo[q.mark_variant]"
 ```
+### this doc is possible thanks to:
+**SirLich, MedicalJewel105, Overload1252, ChibiMango**
